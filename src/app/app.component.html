@@ -32,9 +32,10 @@
   <div *ngIf="falhaAoPesquisar">
     <small class="text-danger">Falha ao realizar pesquisa!</small>
   </div>
-
-  <div *ngIf="showDiv">
-    <app-tabela></app-tabela>
+  <div class="container">
+    <div class="row" *ngIf="showDiv">
+      <app-tabela class="col-12" [webSites] = sitesFiltrados></app-tabela>
+    </div>
   </div>
 
   <router-outlet></router-outlet>
