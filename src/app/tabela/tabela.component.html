@@ -1,19 +1,19 @@
-
-<table class="table row">
-  <tbody class="col-12" *ngFor=" let webSite of webSites; index as i">
+<table class="table">
+  <tbody *ngFor=" let site of webSites; index as i">
     <tr>
       <td>
         <div class="topSearh">
-          <small>{{webSite.nome}}</small><br>
-          <small>{{webSite.url}}</small>
+          <small>{{site.nome}}</small><br>
+          <small>{{site.url}}</small>
         </div>
         <div class="middleSearh">
-          <a href="{{webSite.url}}">{{webSite.url}}</a>
+          <a href="{{site.url}}">{{site.url}}</a>
         </div>
-       <div class="footerSearh">
-        {{webSite.descricao}}
-       </div>
+        <div class="footerSearh">
+        {{site.descricao}}
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+
