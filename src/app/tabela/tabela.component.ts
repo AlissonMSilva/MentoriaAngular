@@ -1,28 +1,43 @@
-import { Component, Input } from '@angular/core';
-import { WebSitesDto } from '../Dto/WebSitesDto';
+import { Component, Input, OnInit } from '@angular/core';
+import { WebSitesDto } from '../../shared/models/WebSitesDto';
+import { WebSitesService } from 'src/shared/service/webSites.service';
 
 @Component({
   selector: 'app-tabela',
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css']
 })
-export class TabelaComponent {
-  @Input() webSites: WebSitesDto[] = [];
-  public siteBuscados: WebSitesDto[] = [];
+export class TabelaComponent implements OnInit{
+  @Input() valorPesquisadoWebSite: string = '';
+  public valorFiltradoCache: string = '';
+  public webSitesFiltrados: WebSitesDto[] = [];
+  public webSiteDto: WebSitesDto[] = [];
+
+  constructor(private _webSiteService: WebSitesService)
+  {
+    this.webSiteDto = this._webSiteService.buscarWebSites();
+  }
 
   ngOnInit(){
-    this.FiltrarListaSitesDisponiveis();
+    //deve iniciar o skeleton
+
   }
 
-  public FiltrarListaSitesDisponiveis()
+  ngOnChanges()
   {
-    console.log("texto");
-    this.siteBuscados.splice(0, this.siteBuscados.length);
-    // this.siteBuscados = this.webSites.filter(x => x.nome.includes(textoPesquisa));
+    if(this.valorPesquisadoWebSite != '' && this.valorPesquisadoWebSite != this.valorFiltradoCache)
+    {
+      console.log("Filtrar por valor de pesquisa");
+      this.FiltraListaSitesDisponiveis();
+    }
+
   }
 
-  enviarValor() {
-    console.log("Recibi o valor!");
-
+  public FiltraListaSitesDisponiveis()
+  {
+    //inicia o Skeleton
+    this.valorFiltradoCache = this.valorPesquisadoWebSite;
+    this.webSitesFiltrados = this.webSiteDto.filter(x => x.nome?.toLocaleLowerCase().includes(this.valorPesquisadoWebSite.toLocaleLowerCase()) || x.descricao?.toLocaleLowerCase().includes(this.valorPesquisadoWebSite.toLocaleLowerCase()));
+    // apos xtime para Skeleton
   }
 }

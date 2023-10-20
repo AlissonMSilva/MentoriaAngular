@@ -26,15 +26,15 @@
 
   <div class="input-group mb-3 pt-3">
     <span class="input-group-text" id="basic-addon1"><i class="fas fa-search" aria-hidden="true"></i></span>
-    <input type="text" [(ngModel)]="textoPesquisa" class="form-control" placeholder="Pesquise no Google ou digite um URL" aria-label="Username" aria-describedby="basic-addon1">
+    <input type="text" [(ngModel)]="textoPesquisa" (change)="falhaAoPesquisar = false" class="form-control" placeholder="Pesquise no Google ou digite um URL" aria-label="Username" aria-describedby="basic-addon1">
   </div>
-  <button (click)="MonstrarDiv()" type="button" class="btn btn-primary">Primary</button>
-  <div *ngIf="falhaAoPesquisar">
+  <div class="pb-3" *ngIf="falhaAoPesquisar">
     <small class="text-danger">Falha ao realizar pesquisa!</small>
   </div>
+  <button (click)="MonstrarDiv()" type="button" class="btn btn-primary">Primary</button>
   <div class="container">
     <div class="row" *ngIf="showDiv">
-      <app-tabela class="col-12" [webSites] = sitesFiltrados></app-tabela>
+      <app-tabela class="col-12" [valorPesquisadoWebSite] = valorPesquisado></app-tabela>
     </div>
   </div>
 
